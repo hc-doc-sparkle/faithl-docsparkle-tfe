@@ -3,7 +3,12 @@
 FEATURES:
 * **New Resource**: `tfe_workspace_variable_set` ([#537](https://github.com/hashicorp/terraform-provider-tfe/pull/537)) adds the ability to assign a variable set to a workspace in a single, flexible resource.
 
-DEPRECATION NOTICE: The `workspace_ids` argument on `tfe_variable_set` has been labelled as deprecated and should not be used in conjunction with `tfe_workspace_variable_set`.
+ENHANCEMENTS:
+* r/tfe_registry_module: Add ability to create both public and private `registry_modules` without VCS. ([#546](https://github.com/hashicorp/terraform-provider-tfe/pull/546))
+
+DEPRECATION NOTICE:
+* The `workspace_ids` argument on `tfe_variable_set` has been labelled as deprecated and should not be used in conjunction with `tfe_workspace_variable_set`.
+* The `registry_modules` import format `<ORGANIZATION>/<REGISTRY MODULE NAME>/<REGISTRY MODULE PROVIDER>/<REGISTRY MODULE ID>` has been deprecated in favour of `<ORGANIZATION>/<REGISTRY_NAME>/<NAMESPACE>/<REGISTRY MODULE NAME>/<REGISTRY MODULE PROVIDER>/<REGISTRY MODULE ID>` to support public and private `registry_modules`.
 
 ## 0.32.1 (June 21st, 2022)
 
