@@ -2,6 +2,7 @@
 
 FEATURES:
 * **New Resource**: `tfe_workspace_variable_set` ([#537](https://github.com/hashicorp/terraform-provider-tfe/pull/537)) adds the ability to assign a variable set to a workspace in a single, flexible resource.
+* r/organization: Add `workspace_limit` setting ([#521](https://github.com/hashicorp/terraform-provider-tfe/pull/521))
 
 DEPRECATION NOTICE: The `workspace_ids` argument on `tfe_variable_set` has been labelled as deprecated and should not be used in conjunction with `tfe_workspace_variable_set`.
 
