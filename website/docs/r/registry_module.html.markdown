@@ -99,6 +99,8 @@ The `vcs_repo` block supports:
 * `module_provider` - The provider of the registry module.
 * `name` - The name of registry module.
 * `organization` - The name of the organization associated with the registry module.
+* `namespace` - The namespace of the module. For private modules this is the name of the organization that owns the module.
+* `registry_name` - The registry name of the registry module depicting whether the registry module is private or public.
 
 ## Import
 
