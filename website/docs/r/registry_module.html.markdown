@@ -76,7 +76,7 @@ The following arguments are supported:
 
 * `vcs_repo` - (Optional) Settings for the registry module's VCS repository. Forces a
   new resource if changed. One of `vcs_repo` or `module_provider` is required.
-* `module_provider` - (Optional) The provider of the registry module.
+* `module_provider` - (Optional) Specifies the Terraform provider that this module is used for. For example, "aws"
 * `name` - (Optional) The name of registry module. It must be set if `module_provider` is used.
 * `organization` - (Optional) The name of the organization associated with the registry module. It must be set if `module_provider` is used.
 * `namespace` - (Optional) The namespace of a public registry module. It can be used if `module_provider` is set and `registry_name` is public.
@@ -96,7 +96,7 @@ The `vcs_repo` block supports:
 ## Attributes Reference
 
 * `id` - The ID of the registry module.
-* `module_provider` - The provider of the registry module.
+* `module_provider` - The Terraform provider that this module is used for.
 * `name` - The name of registry module.
 * `organization` - The name of the organization associated with the registry module.
 * `namespace` - The namespace of the module. For private modules this is the name of the organization that owns the module.

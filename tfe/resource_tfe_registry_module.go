@@ -24,22 +24,20 @@ func resourceTFERegistryModule() *schema.Resource {
 		Schema: map[string]*schema.Schema{
 			"organization": {
 				Type:     schema.TypeString,
-				Computed: true,
 				Optional: true,
+				ForceNew: true,
 			},
 			"module_provider": {
-				Type:          schema.TypeString,
-				Computed:      true,
-				Optional:      true,
-				ForceNew:      true,
-				ExactlyOneOf:  []string{"vcs_repo"},
-				ConflictsWith: []string{"vcs_repo"},
-				RequiredWith:  []string{"organization", "name"},
+				Type:         schema.TypeString,
+				Optional:     true,
+				ForceNew:     true,
+				ExactlyOneOf: []string{"vcs_repo"},
+				RequiredWith: []string{"organization", "name"},
 			},
 			"name": {
 				Type:     schema.TypeString,
-				Computed: true,
 				Optional: true,
+				ForceNew: true,
 			},
 			"vcs_repo": {
 				Type:     schema.TypeList,
@@ -69,14 +67,12 @@ func resourceTFERegistryModule() *schema.Resource {
 			},
 			"namespace": {
 				Type:         schema.TypeString,
-				Computed:     true,
 				Optional:     true,
 				ForceNew:     true,
 				RequiredWith: []string{"registry_name"},
 			},
 			"registry_name": {
 				Type:         schema.TypeString,
-				Computed:     true,
 				Optional:     true,
 				ForceNew:     true,
 				RequiredWith: []string{"module_provider"},
@@ -112,7 +108,7 @@ func resourceTFERegistryModuleCreateWithVCS(v interface{}, meta interface{}) (*t
 
 func resourceTFERegistryModuleCreateWithoutVCS(meta interface{}, d *schema.ResourceData) (*tfe.RegistryModule, error) {
 	tfeClient := meta.(*tfe.Client)
-	// Create module without VCS.
+
 	options := tfe.RegistryModuleCreateOptions{
 		Name:     tfe.String(d.Get("name").(string)),
 		Provider: tfe.String(d.Get("module_provider").(string)),
@@ -121,17 +117,8 @@ func resourceTFERegistryModuleCreateWithoutVCS(meta interface{}, d *schema.Resou
 	if registryName, ok := d.GetOk("registry_name"); ok {
 		options.RegistryName = tfe.RegistryName(registryName.(string))
 
-		namespace, ok := d.GetOk("namespace")
-		if registryName.(string) == "private" && ok {
-			// Namespace is not allowed for private registry name
-			return nil, fmt.Errorf("Namespace is not allowed for %s registry name", registryName)
-		}
-
 		if registryName.(string) == "public" {
-			if !ok { // Namespace is required for public registry name
-				return nil, fmt.Errorf("Namespace is required for %s registry name", registryName)
-			}
-			options.Namespace = namespace.(string)
+			options.Namespace = d.Get("namespace").(string)
 		}
 	}
 
